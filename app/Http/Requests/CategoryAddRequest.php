@@ -29,7 +29,7 @@ class CategoryAddRequest extends FormRequest
             return
             [
                 'name'        => 'required',
-                'image'       => 'required|max:2048',
+                'image'       => 'required|mimes:jpeg,jpg,png,gif|required|max:2048'
             ];
        }
        else

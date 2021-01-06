@@ -68,17 +68,17 @@
             <li @if(@$sub_menu=="add") class="active" @endif><a href="{{url('outlet/location/'.$merchant_id)}}"><i class="fa fa-circle-o"></i>Add</a></li>
           </ul>
         </li>
-        <li class="treeview @if(@$main_menu=='book') menu-open @endif">
+        <li class="treeview @if(@$main_menu=='item') menu-open @endif">
           <a href="#">
             <i class="fa fa-book" aria-hidden="true"></i>
-            <span>Sub Categories</span>
+            <span>Item</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu" @if(@$main_menu=="subcategory") style="display: block;" @endif>
-            <li @if(@$sub_menu=="add") class="active" @endif><a href="{{url('subcategory/add')}}"><i class="fa fa-circle-o"></i>Add</a></li>
-            <li @if(@$sub_menu=="list") class="active" @endif><a href="{{url('subcategory')}}"><i class="fa fa-circle-o"></i>List</a></li>
+          <ul class="treeview-menu" @if(@$main_menu=="item") style="display: block;" @endif>
+            <li @if(@$sub_menu=="add") class="active" @endif><a href="{{url('outlet/add-item/'.$merchant_id)}}"><i class="fa fa-circle-o"></i>Add</a></li>
+            <li @if(@$sub_menu=="list") class="active" @endif><a href="{{url('outlet/item-list/'.$merchant_id)}}"><i class="fa fa-circle-o"></i>List</a></li>
           </ul>
         </li>
       </ul>

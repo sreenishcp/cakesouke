@@ -31,17 +31,22 @@ class MerchantAddRequests extends FormRequest
                 'm_name'            => 'required',
                 'm_phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
                 'password'          => 'required|confirmed|min:6',
-                'image'             => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'cover_photo'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'email'             => 'required|unique:users,email'
+                'image'             => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'cover_photo'       => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'email'             => 'required|unique:users,email',
+                'whatsapp_number'   => 'required_without:instagram_link|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'instagram_link'    => 'required_without:whatsapp_number',
             ];
        }
        else
        {
             return
             [
+                'email'             => 'required|unique:users,email,2,id',
                 'm_name'            => 'required',
-                'm_phone'       => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'm_phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'whatsapp_number'   => 'required_without:instagram_link|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+                'instagram_link'    => 'required_without:whatsapp_number',
             ];
        }
     }

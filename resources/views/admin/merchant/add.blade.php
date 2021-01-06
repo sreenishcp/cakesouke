@@ -10,6 +10,19 @@
         </ul>
     </div>
 @endif
+@if (session()->has('error'))
+    <div class="alert alert-danger">
+        @if(is_array(session()->get('error')))
+        <ul>
+            @foreach (session()->get('error') as $message)
+                <li>{{ $message }}</li>
+            @endforeach
+        </ul>
+        @else
+            {{ session()->get('error') }}
+        @endif
+    </div>
+@endif
 <div align="center">
 	<div class="page-body" style="margin-top: 80px;">
 		<div class="row">
@@ -145,7 +158,19 @@
 								<div class="col-sm-4">
 									{!! Form::text('m_period_end_date',$end_date, ['class' => 'form-control date']) !!}
 								</div>
-							</div> 
+							</div>
+							<div class="form-group row">
+								   {!! Form::label('name', 'Whatsapp No.',['class' => 'col-sm-2 col-form-label']) !!}  
+								<div class="col-sm-4">
+									{!! Form::number('whatsapp_number','', ['class' => 'form-control']) !!}
+								</div>
+							</div>
+							<div class="form-group row">
+								   {!! Form::label('name', 'Instagram Link',['class' => 'col-sm-2 col-form-label']) !!}  
+								<div class="col-sm-4">
+									{!! Form::text('instagram_link','', ['class' => 'form-control']) !!}
+								</div>
+							</div>    
 							<div class="form-group row">
 								{!! Form::label('', '',['class' => 'col-sm-2 col-form-label']) !!}   
 								<div class="col-sm-4">

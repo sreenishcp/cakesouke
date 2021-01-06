@@ -2,7 +2,7 @@
 
             <!-- Logo -->
         
-<a href="{{ url('/') }}" class="logo">
+<a href="{{ url('/administrator') }}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>B</b>APP</span>
       <!-- logo for regular state and mobile devices -->
@@ -131,7 +131,7 @@
                                 </li> -->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{ url('/') }}" class="btn btn-default btn-flat">Home</a>
+                                        <a href="{{ url('/administrator') }}" class="btn btn-default btn-flat">Home</a>
                                     </div>
                                     <div class="pull-right">
                                         <a href="{{ url('/logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault();

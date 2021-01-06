@@ -78,7 +78,7 @@
             </span>
           </a>
           <ul class="treeview-menu" @if(@$main_menu=="merchant") style="display: block;" @endif>
-            <li><a href="{{url('merchant/create')}}"><i class="fa fa-circle-o"></i> Add</a></li>
+            <li @if(@$sub_menu=="add") class="active" @endif><a href="{{url('merchant/create')}}"><i class="fa fa-circle-o"></i> Add</a></li>
             <li @if(@$sub_menu=="list") class="active" @endif><a href="{{url('merchant/')}}"><i class="fa fa-circle-o"></i> List</a></li>
           </ul>
         </li>

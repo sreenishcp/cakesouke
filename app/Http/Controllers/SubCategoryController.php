@@ -6,6 +6,7 @@ use App\SubCategory;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests\SubCategoryAddRequest;
+use Illuminate\Support\Facades\File;
 class SubCategoryController extends Controller
 {
     /**
@@ -128,7 +129,10 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $category,Request $request)
     {
+        $subcategory = SubCategory::findOrFail($request->category_id);
         SubCategory::where('id',$request->category_id)->delete();
+        $image_path = public_path('categories/').$subcategory->image;
+        File::delete($image_path);
         return redirect('subcategory')->withSuccess(['Sub Category Deleted successfully!']);
 
     }

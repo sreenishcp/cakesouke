@@ -10,10 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Route::get('/', 'FrontController@create');
+Route::post('search', 'FrontController@index')->name('search');
 
+
+Auth::routes();
 Route::get('home', 'HomeController@index');
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/administrator', 'HomeController@index')->name('home');
 Route::group(array('prefix' => 'merchant','middleware' => ['auth']), function()
 {
     Route::get('/', 'MerchantController@index')->name('merchant');
@@ -45,10 +48,19 @@ Route::group(array('prefix' => 'outlet','middleware' => ['auth']), function()
     Route::get('dashboard/{id}', 'MerchantDashboard@index')->name('dashboard');
     Route::get('/location/{id}', 'MerchantDashboard@location');
     Route::post('/submit-location', 'MerchantDashboard@submit_location')->name('map.submit');
+    Route::get('/add-item/{id}', 'ItemController@create');
+    Route::post('/submit-item', 'ItemController@store')->name('item.submit');
+    Route::get('/item-list/{id}', 'ItemController@index')->name('item-list');
+    Route::get('/edit-item/{id}', 'ItemController@edit');
+    Route::post('/update/{id}', 'ItemController@update')->name('update_item');
+    Route::post('/delete/', 'ItemController@destroy')->name('delete.item');
+    Route::post('/chooss-location-submit', 'MerchantDashboard@update_location')->name('update.location_map');
+    
 });
 Route::post('/change-user-status', 'MerchantController@change_user_status')->name('change-user-status');
 Route::post('/change-category-status', 'CategoryController@change_category_status')->name('change-category-status');
 Route::post('/change-sub-category-status', 'SubCategoryController@change_category_status')->name('change-sub-category-status');
+Route::post('/change-item-status', 'ItemController@change_status')->name('change-item-status');
 Route::prefix('json')->group(function () 
 {
 	Route::post('/json_auth','JsonUserController@login');

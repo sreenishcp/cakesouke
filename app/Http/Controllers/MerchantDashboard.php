@@ -37,4 +37,17 @@ class MerchantDashboard extends Controller
         Merchant::where('id',$m_id)->update(array('latitude'=>$request->latitude,'longitude'=>$request->longitude));
         return view('admin.location.choose_location_in_map',$data);
     }
+    public function update_location(Request $request)
+    {
+        $data['key']        = '';
+        $data['breadcrump'] = array('app_user'=>'add users');
+        $data['main_menu']  = 'merchant';
+        $data['sub_menu']   = 'list';
+        $data['latitude']   = $request->latitude;
+        $data['longitude']  = $request->longitude;
+        $m_id               = $request->merchant_id;
+        $data['merchant_id']= $m_id;
+        Merchant::where('id',$m_id)->update(array('latitude'=>$request->latitude,'longitude'=>$request->longitude));
+        return view('admin.location.choose_location_in_map',$data);
+    }
 }

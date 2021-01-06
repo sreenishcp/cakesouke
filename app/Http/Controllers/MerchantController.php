@@ -53,13 +53,17 @@ class MerchantController extends Controller
      */
     public function store(MerchantAddRequests $request)
     {
-        $merchant             = new Merchant;
-        $merchant->m_name     = $request->m_name;
-        $merchant->address    = $request->address;
-        $merchant->oulet_name = $request->oulet_name;
-        $merchant->m_phone    = $request->m_phone;
+        $merchant                  = new Merchant;
+        $merchant->m_name          = $request->m_name;
+        $merchant->address         = $request->address;
+        $merchant->oulet_name      = $request->oulet_name;
+        $merchant->m_phone         = $request->m_phone;
+        $merchant->whatsapp_number = $request->whatsapp_number;
+        $merchant->instagram_link  = $request->instagram_link;
         $merchant->m_period_start_date   = date("Y-m-d",strtotime($request->m_period_start_date));
         $merchant->m_period_end_date     = date("Y-m-d",strtotime($request->m_period_end_date));
+        if($request->whatsapp_number==''&&$request->instagram_link=='')
+            return redirect()->back()->with('error','Whatsapp number or insrtagram link required');
             if($request->hasFile('image')) 
            {
              $file       = $request->file('image');
@@ -128,11 +132,13 @@ class MerchantController extends Controller
           $validatedData = $request->validate([
             'password'  => 'required|confirmed|min:6',
           ]);
-        $merchant = Merchant::findOrFail($id);
-        $merchant['m_name']     = $request->m_name;
-        $merchant['address']    = $request->address;
-        $merchant['oulet_name'] = $request->oulet_name;
-        $merchant['m_phone']    = $request->m_phone;
+        $merchant                    = Merchant::findOrFail($id);
+        $merchant['m_name']          = $request->m_name;
+        $merchant['address']         = $request->address;
+        $merchant['oulet_name']      = $request->oulet_name;
+        $merchant['m_phone']         = $request->m_phone;
+        $merchant['whatsapp_number'] = $request->whatsapp_number;
+        $merchant['instagram_link']  = $request->instagram_link;
         $merchant['m_period_start_date']   = date("Y-m-d",strtotime($request->m_period_start_date));
         $merchant['m_period_end_date']     = date("Y-m-d",strtotime($request->m_period_end_date));
         $image_name  = $request->image_old;
@@ -140,7 +146,7 @@ class MerchantController extends Controller
             if($request->hasFile('image')) 
            {
                 $validatedData = $request->validate([
-                'image'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image'   => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
               ]);
              $file       = $request->file('image');
              $image_name  = time().'.'.$request->image->getClientOriginalExtension();  
@@ -149,7 +155,7 @@ class MerchantController extends Controller
             if($request->hasFile('cover_photo')) 
            {
             $validatedData = $request->validate([
-                'cover_photo'   => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'cover_photo'   => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
               ]);
              $file       = $request->file('cover_photo');
              $cover_photo_name  = time().'.'.$request->cover_photo->getClientOriginalExtension();  

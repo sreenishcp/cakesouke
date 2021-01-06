@@ -25,9 +25,11 @@
 					@endif
 					<div class="card-block">
 						  <h4 class="sub-title"></h4>
-						 {{ Form::open(['route' => 'category.submit','files'=>true]) }}
+						 {{ Form::open(['route' => 'update.location_map','files'=>true]) }}
 						 <input type="hidden" name="latitude" value="<?=$latitude;?>" placeholder="latitude" id="latitude"/>
 						<input type="hidden" name="longitude" value="<?=$longitude;?>" placeholder="longitude" id="longitude"/>
+            <input type="hidden" name="merchant_id" value="<?=$merchant_id;?>"/>
+            
 						<div class="form-group row">
 							<div id="webkulMap" style="width: 50%; height: 400px;"></div>
 						</div>

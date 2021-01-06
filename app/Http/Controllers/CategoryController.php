@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryAddRequest;
+use Illuminate\Support\Facades\File;
 class CategoryController extends Controller
 {
     /**
@@ -123,7 +124,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category,Request $request)
     {
+        $category   = Category::findOrFail($request->category_id);
         Category::where('id',$request->category_id)->delete();
+        $image_path = public_path('categories/').$category->image;
+        File::delete($image_path);
         return redirect('category')->withSuccess(['Category Deleted successfully!']);
 
     }
