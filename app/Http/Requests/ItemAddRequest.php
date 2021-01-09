@@ -31,6 +31,8 @@ class ItemAddRequest extends FormRequest
                 'name'        => 'required',
                 'description' => 'required',
                 'price'       => 'required',
+                'category_id' => 'required',
+                'sub_category_id'       => 'required',
                 'image'       => 'required|mimes:jpeg,jpg,png,gif|required|max:2048'
             ];
        }
@@ -41,6 +43,8 @@ class ItemAddRequest extends FormRequest
                 'name'        => 'required',
                 'description' => 'required',
                 'price'       => 'required',
+                'category_id' => 'required',
+                'sub_category_id' => 'required',
             ];
        }
     }

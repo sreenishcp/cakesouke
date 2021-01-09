@@ -61,6 +61,8 @@ Route::post('/change-user-status', 'MerchantController@change_user_status')->nam
 Route::post('/change-category-status', 'CategoryController@change_category_status')->name('change-category-status');
 Route::post('/change-sub-category-status', 'SubCategoryController@change_category_status')->name('change-sub-category-status');
 Route::post('/change-item-status', 'ItemController@change_status')->name('change-item-status');
+Route::post('/get-subcategories', 'SubCategoryController@get_subcategories')->name('get-subcategories');
+
 Route::prefix('json')->group(function () 
 {
 	Route::post('/json_auth','JsonUserController@login');

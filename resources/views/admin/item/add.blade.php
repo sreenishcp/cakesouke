@@ -42,6 +42,19 @@
 								</div>
 							</div>
 							<div class="form-group row">
+								   {!! Form::label('name', 'Category',['class' => 'col-sm-2 col-form-label']) !!}
+								<div class="col-sm-4">
+									{!! Form::select('category_id',$category,@$item->category_id, ['class' => 'form-control','id'=>'category']) !!}
+								</div>
+							</div>
+							<div class="form-group row">
+								   {!! Form::label('name', 'Sub category',['class' => 'col-sm-2 col-form-label']) !!}
+   
+								<div class="col-sm-4">
+									{!! Form::select('sub_category_id',$subcategory,@$item->category_id, ['class' => 'form-control','id'=>'subcategory']) !!}
+								</div>
+							</div>
+							<div class="form-group row">
 								   {!! Form::label('name', 'Description',['class' => 'col-sm-2 col-form-label']) !!}
    
 								<div class="col-sm-4">
@@ -134,17 +147,24 @@ only screen and (max-width: 760px),
 </style>
 
 <script type="text/javascript">
-$(document).ready(function(){
-  setTimeout(function(){ $('.alert-success').fadeOut() }, 2000);
+$("#category").change(function(){
+	var category_id = $(this).val();
+	    $.ajax({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	    , url: "{{ route('get-subcategories') }}"
+	    , method: "POST"
+	    , data: {
+	        category_id: category_id
+	    }
+	    , success: function(data) {
+	    	$("#subcategory").html('');
+	    	$("#subcategory").html(data);
+	    }
+	});
 });
 
-jQuery(function() {
-  var datepicker = $('input.date');
-     datepicker.datepicker({
-      setDate: new Date(),
-      todayHighlight: true,
-    });
-});
 </script>
 
 @endsection

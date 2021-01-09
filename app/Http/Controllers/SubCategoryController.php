@@ -142,4 +142,14 @@ class SubCategoryController extends Controller
        $status      = $request->cur_status;
        SubCategory::where('id',$category_id)->update(['status'=>$status]);
     }
+    public function get_subcategories(Request $request)
+    { 
+       $category_id = $request->category_id;
+       $subcategories=SubCategory::where('category_id',$category_id)->get(array('id','name'));
+       $output='<option></option>';
+       foreach ($subcategories as $key => $value) {
+           $output.='<option value='.$value->id.'>'.$value->name.'</option>';
+       }
+       echo $output;
+    }
 }

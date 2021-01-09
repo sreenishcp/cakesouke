@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\ItemAddRequest;
+use App\Category;
+use App\SubCategory;
 class ItemController extends Controller
 {
     /**
@@ -44,6 +46,8 @@ class ItemController extends Controller
         $data['main_menu']  = 'item';
         $data['sub_menu']   = 'add';
         $data['merchant_id']= $merchant_id;
+        $data['category']   = Category::where('status',0)->pluck('name','id')->prepend("Select","");
+        $data['subcategory']= array();
         return view('admin.item.add',$data);
     }
 
@@ -62,6 +66,8 @@ class ItemController extends Controller
         $item->price         = $request->price;
         $item->merchant_id   = $request->merchant_id;
         $item->offer_price   = $request->offer_price;
+        $item->category_id   = $request->category_id;
+        $item->sub_category_id = $request->sub_category_id;
         if($request->offer_price==''||$request->offer_price==0)
         $item->offer_price   = 0;
         if($request->hasFile('image')) 
@@ -99,6 +105,8 @@ class ItemController extends Controller
         $data['main_menu']  = 'item';
         $data['sub_menu']   = 'list';
         $data['merchant_id']= $id;
+        $data['category']   = Category::where('status',0)->pluck('name','id');
+        $data['subcategory']= SubCategory::where('category_id',$data['item']->category_id)->pluck('name','id');
         return view('admin.item.add',$data);
     }
 
@@ -119,6 +127,8 @@ class ItemController extends Controller
         $item['merchant_id']   = $request->merchant_id;
         $item['offer_price']   = $request->offer_price;
         $image_name            = $request->image_old;
+        $item['category_id']   = $request->category_id;
+        $item['sub_category_id'] = $request->sub_category_id;
         if($request->hasFile('image')) 
         {
             $validatedData = $request->validate([
