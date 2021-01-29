@@ -108,14 +108,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">User delete</h4>
+          <h4 class="modal-title">Merchant delete</h4>
         </div>
         <div class="modal-body">
-          <p>Do you want delete this user..?</p>
+          <p>Do you want delete this merchant..?</p>
         </div>
         <div class="modal-footer">
-          {{ Form::open(['route' => 'merchant.submit','method'=>'post']) }}
-          {!! Form::hidden('user_id','', ['class' => 'form-control user_id']) !!}
+          {{ Form::open(['route' => 'merchant.delete','method'=>'post']) }}
+          {!! Form::hidden('merchant_id','', ['class' => 'form-control merchant_id']) !!}
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           <button type="submit" class="btn btn-default">Confirm</button>
           {!! Form::close() !!}
@@ -165,7 +165,7 @@
 { 
   $("#myModal").modal('show');
   var id = $(this).data('id');
-  $(".user_id").val(id);
+  $(".merchant_id").val(id);
 }); 
 
 setTimeout(function() {

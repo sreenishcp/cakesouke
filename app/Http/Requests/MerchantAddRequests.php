@@ -42,7 +42,7 @@ class MerchantAddRequests extends FormRequest
        {
             return
             [
-                'email'             => 'required|unique:users,email,2,id',
+                'email'             => 'required|unique:users,email,'.$user_id.',id',
                 'm_name'            => 'required',
                 'm_phone'           => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
                 'whatsapp_number'   => 'required_without:instagram_link|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',

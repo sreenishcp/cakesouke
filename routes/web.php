@@ -23,7 +23,8 @@ Route::group(array('prefix' => 'merchant','middleware' => ['auth']), function()
     Route::get('/create', 'MerchantController@create');
     Route::post('submit', 'MerchantController@store')->name('merchant.submit');
     Route::get('edit/{id}', 'MerchantController@edit');
-    Route::post('update_merchant/{id}', 'MerchantController@update')->name('update_merchant'); 
+    Route::post('update_merchant/{id}', 'MerchantController@update')->name('update_merchant');
+    Route::post('delete/', 'MerchantController@destroy')->name('merchant.delete'); 
 });
 Route::group(array('prefix' => 'category','middleware' => ['auth']), function()
 {

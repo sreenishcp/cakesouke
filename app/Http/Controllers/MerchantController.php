@@ -68,13 +68,16 @@ class MerchantController extends Controller
            {
              $file       = $request->file('image');
              $image_name  = time().'.'.$request->image->getClientOriginalExtension();  
-             $request->image->move(public_path('images'), $image_name);
+             $path = 'images';
+             $file->move($path, $image_name);
             }
             if($request->hasFile('cover_photo')) 
            {
              $file       = $request->file('cover_photo');
              $cover_photo_name  = time().'.'.$request->cover_photo->getClientOriginalExtension();  
-             $request->cover_photo->move(public_path('cover_photos'), $cover_photo_name);
+             $path = 'cover_photos';
+             $file->move($path, $cover_photo_name);
+             //$request->cover_photo->move(public_path('cover_photos'), $cover_photo_name);
             }
         $merchant->image        = $image_name;
         $merchant->cover_photo  = $cover_photo_name;
@@ -150,7 +153,8 @@ class MerchantController extends Controller
               ]);
              $file       = $request->file('image');
              $image_name  = time().'.'.$request->image->getClientOriginalExtension();  
-             $request->image->move(public_path('images'), $image_name);
+             $path = 'images';
+             $file->move($path, $image_name);
             }
             if($request->hasFile('cover_photo')) 
            {
@@ -159,7 +163,8 @@ class MerchantController extends Controller
               ]);
              $file       = $request->file('cover_photo');
              $cover_photo_name  = time().'.'.$request->cover_photo->getClientOriginalExtension();  
-             $request->cover_photo->move(public_path('cover_photos'), $cover_photo_name);
+             $path = 'cover_photos';
+             $file->move($path, $cover_photo_name);
             }
         $merchant['image']        = $image_name;
         $merchant['cover_photo']  = $cover_photo_name;
@@ -178,9 +183,11 @@ class MerchantController extends Controller
      * @param  \App\Merchant  $merchant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Merchant $merchant)
+    public function destroy(Merchant $merchant,Request $request)
     {
-        //
+        $id= $request->merchant_id;
+        Merchant::where('id',$id)->delete();
+        return redirect()->route('merchant')->withSuccess(['merchant Deleted successfully!']);
     }
     public function change_user_status(Request $request)
     { 
