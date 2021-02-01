@@ -64,6 +64,18 @@ Route::post('/change-sub-category-status', 'SubCategoryController@change_categor
 Route::post('/change-item-status', 'ItemController@change_status')->name('change-item-status');
 Route::post('/get-subcategories', 'SubCategoryController@get_subcategories')->name('get-subcategories');
 
+
+Route::group(array('prefix' => 'vendor'), function()
+{
+    Route::get('/', 'VendorController@index')->name('vendor');
+    Route::get('/add-product', 'VendorController@create');
+    Route::post('submit', 'VendorController@store')->name('merchant.submit');
+    Route::get('edit/{id}', 'VendorController@edit');
+    Route::post('update_merchant/{id}', 'VendorController@update')->name('update_merchant');
+    Route::post('delete/', 'VendorController@destroy')->name('merchant.delete'); 
+});
+
+
 Route::prefix('json')->group(function () 
 {
 	Route::post('/json_auth','JsonUserController@login');
